@@ -1,0 +1,14 @@
+
+body {
+  background-color: whitesmoke;
+}
+
+.div_map {
+  text-align: center;
+  display: block;
+}
+
+#data-vis {
+  margin-left: auto;
+  margin-right: auto;
+}
