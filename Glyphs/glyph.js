@@ -21,7 +21,7 @@ function setCircles(circle, ger) {
             .on("mousemove", function(d) {
                 /* d3.pointer(d) gets the x and y distance from the middle point of circle
                 -> Largest absolute distance of x or y from the circle center [0,0] represents the volume of each tone
-                -> By moving the from 8px to 0px the volume of the tone increases 
+                -> By moving from 8px to 0px the volume of the tone increases
                 */
                 var coords = d3.pointer( d ) 
                 console.log(coords) 

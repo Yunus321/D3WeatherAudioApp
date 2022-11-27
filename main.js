@@ -2,7 +2,7 @@
 var width = window.innerWidth-20;
 var height = window.innerHeight-20;
 
-//source : © GeoBasis-DE / BKG 2013 (Data changed) - visualize the map by hrough a geojson file
+//source : © GeoBasis-DE / BKG 2013 (Data changed) - visualize the map by a geojson file
 //load data and set in the D3 js interface
 d3.json('/Json_data/landkreise_simplify200.geojson').then(function(ger) {
 
@@ -45,5 +45,4 @@ d3.json('/Json_data/landkreise_simplify200.geojson').then(function(ger) {
 
     var circle = d3.select("g").selectAll('circle');
     setCircles(circle, ger);
-    
 });
