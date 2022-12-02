@@ -7,7 +7,7 @@ const numberOfFeatures = 5;
 var projection;
 var objectData = [];
 var urls = [];
-
+var glyphRadius = 5;
 
 //source : © GeoBasis-DE / BKG 2013 (Data changed) - visualize the map by a geojson file
 //load data and set in the D3 js interface
@@ -34,6 +34,15 @@ d3.json('/Json_data/landkreise_simplify200.geojson').then(function(ger) {
         .attr('fill', '#58D68D')
         .attr('stroke', '#000')
         .attr('stroke-width', '0.5px')
+        .on("click", function(d) {
+            /* d3.pointer(d) gets the x and y distance from the middle point of circle
+            -> Largest absolute distance of x or y from the circle center [0,0] represents the volume of each tone
+            -> By moving from 8px to 0px the volume of the tone increases
+            */
+            console.log(d)
+            alert("xxxxxxx")
+            var coords = d3.pointer( d )
+        });
 
     var zoom = d3.zoom()
         .on("zoom", handleZoom)
@@ -70,7 +79,7 @@ d3.json('/Json_data/landkreise_simplify200.geojson').then(function(ger) {
 
     for(var i = 0; i < urls.length; i++) {
         requests[i] = fetch(urls[i])
-        wait(15) //wait synchron to avoid Error by loading the api data
+        wait(20) //time delay is synchron to avoid Error by loading the api data
     }
 
     //Asynchron fetching of data. In case of success the weather data takes around 3 seconds to display the data
