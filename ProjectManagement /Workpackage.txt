@@ -1,0 +1,26 @@
+## Work Package List
+
+#Types: prep, plan, org, doc, code, .... (what else?)
+
+WPID | TYPE  | STATUS |   TITLE                              | DESCRIPTION
+--------------------------------------------------------------------------------------------------------------------------------------
+000  | org   | 100%   |   Create git repo folder structure   | Create discussed repo structure for the project 
+--------------------------------------------------------------------------------------------------------------------------------------
+001  | prep  | 100%   |   Create requirement document draft  | Create file explaining the requirements for the final product 
+--------------------------------------------------------------------------------------------------------------------------------------
+002  | prep  |        |   Create Software Architecture       | Create uml file describing/visualizing the code structure to implement 
+--------------------------------------------------------------------------------------------------------------------------------------
+003  | code  |        |   Implement sinus signal generateion | IN     : Weather glyph information (5 parameters) 
+     |       |        |                                      | PROCESS: Implement a function that combines the 5 parameters into an  
+     |       |        |                                      |          uml documented  (dia or plant-uml) file (visualization)
+     |       |        |                                      |          audio signal where each parameter is represented by a frequency
+     |       |        |                                      |          and the parameter value determines the contribution of that 
+     |       |        |                                      |          frequency within the final audio signal
+     |       |        |                                      | OUT    : Function taking weather parameters as input, producing  
+     |       |        |                                      |          an array representing the samples for one second of audio 
+--------------------------------------------------------------------------------------------------------------------------------------
+000  | code  |        |   TEMPLATE                           | IN     : 
+     |       |        |                                      | PROCESS: 
+     |       |        |                                      |          
+     |       |        |                                      | OUT    : 
+-----------------------------------------------------------------------------------------------------------------------------------

@@ -3,37 +3,36 @@ Requirements :
 
 1. Executive Summary :
 
-- The aim of the project is the audio representation of realtime weather data through glyphs on a given germany map.
-  The glyphs are centered in each district (landkreis) of the germany map. Each glyph has 5 axes which are determined by the weather data.
-  By moving the cursor on a glyph the user hears a sound of that specific district weather data. 
-  The sound is composed by the values of the axes, technically that means that each axes of the glyph gets its own frequency
-  and the sum of the frequencies represents the sound of each glyph. 
-  One of the main goals is to create a varying sound form the different glyphs, so the user can difference between different weather data.
+- The goal of the project is to represent real-time weather data via distinguishable audio signals based on a 5-parameter glyph representing weather parameters user-selectable on a map of Germany.
+  The glyphs are centered in each local district of the map. Each glyph is composed of 5 axes with each representing one of the following parameters: temperature, humidity, wind, sun (number of hours per day), .... .
+  By moving the cursor on one of the glyphs on the map the user should hear a sound representing the respective district's weather data. 
+  The generated sound shall be composed by mixing different sinus waves, one frequency per glyph axis while the specific weather value on that axis will determine the contribution to the sound. The weighted sum of the frequencies represents the sound of each glyph. 
+  The project output will be a software that runs visualizations and audio output in a browser. The user will be able to interact with a displayed map of Germany such that any district will be selectable and the sound will represent the weather in that district. The weather data shall be obtained online via an external API source.
 
 
 2. Project requirements :
 
-- the project map is downloaded from GeoBasis- DE and processed with the visualization library D3- js.
+- the project map is downloaded from GeoBasis.DE and processed with the visualization library D3- js.
 
-- the weather data is from open- meteo and provides hourly free weather data.
+- the weather data will be obtained from open-meteo and provides hourly free weather data.
 
-- each district on the germany map is represented by a glyph which is displayed through a circle.
+- the audio is managed by Audio Context by using the Web Audio API.
 
-- every district has its own coordinates representat which is calculated as the center of the district. These coordinates are the center of each glyph.
+- each district on the Germany map is represented by a glyph 
 
-- the glyphs own 5 axes, the values of the axes are determines by the weather data of each district.
+- each glyph is displayed within a circle at the district location on the map.
 
-- the weather units are ( °C , kmh, mm, cm, %) those units are mapped into Hz (frequency). 
+- each glyphs is comprised of 5 axes, each representing one weather parameter (temperature [°C] ,wind speed [kmh] , rain amount [mm], snow amount [cm],relative humidity [%]) 
+
+- each parameter on a glyph is represented by on sound frequency [Hz}. 
 
 - the frequencies on the axes are limited from 20 up to 20000 Hz.
 
+- each glyph contend will be mapped into a mixed signal of 5 distinct sinus functions  
+
 - the sound of each glyph is a sum of its own frequencies.
 
-- by moving the cursor into the center of each glyph (circle), the sound volume increases.
+- by moving the cursor closer to the center of each glyph (circle), the sound volume increases, moving it away from the center the sound will decrease.
 
-- in addition to the map, a diagramm that displays the frequencies of the weather features as well as the data report of the current glyph / district are also provided.
-
-- the weather features are the current temperature (°C), wind speed (km /h), relative humidity (%) and the daily rain sum (mm), snow sum (cm).
-
-- the audio is managed by Audio Context by using the Web Audio API.
+- in addition to the map, a diagram that displays the resulting audio signal as frequency spectrum as a summary of weather data as text  as well as the  current glyph visualization will also provided.
 
