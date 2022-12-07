@@ -10,17 +10,23 @@ WPID | TYPE  | STATUS |   TITLE                              | DESCRIPTION
 --------------------------------------------------------------------------------------------------------------------------------------
 002  | prep  |        |   Create Software Architecture       | Create uml file describing/visualizing the code structure to implement 
 --------------------------------------------------------------------------------------------------------------------------------------
-003  | code  |        |   Implement sinus signal generateion | IN     : Weather glyph information (5 parameters) 
-     |       |        |                                      | PROCESS: Implement a function that combines the 5 parameters into an  
+003  | code  | 100%   |   Implement sinus signal generation  | IN     : Weather glyph information (5 parameters) 
+     |       |        |                                      | PROCESS: Implement a function that combines the 5 parameters into an
      |       |        |                                      |          uml documented  (dia or plant-uml) file (visualization)
      |       |        |                                      |          audio signal where each parameter is represented by a frequency
-     |       |        |                                      |          and the parameter value determines the contribution of that 
+     |       |        |                                      |          and the parameter value determines the contribution of that
      |       |        |                                      |          frequency within the final audio signal
-     |       |        |                                      | OUT    : Function taking weather parameters as input, producing  
-     |       |        |                                      |          an array representing the samples for one second of audio 
+     |       |        |                                      | OUT    : Function taking weather parameters as input, producing
+     |       |        |                                      |          an array representing the samples for one second of audio
 --------------------------------------------------------------------------------------------------------------------------------------
-000  | code  |        |   TEMPLATE                           | IN     : 
-     |       |        |                                      | PROCESS: 
-     |       |        |                                      |          
-     |       |        |                                      | OUT    : 
------------------------------------------------------------------------------------------------------------------------------------
+004  | code  |        |   Implement glyph data visualization | IN     : Weather + district informations of current glyph
+     |       |        |                                      | PROCESS: Implement a function for visualizing the current glyph.
+     |       |        |                                      |          To displaying the glyph informations, the cursor has to be
+     |       |        |                                      |          on the glyph. The glyph data will be displayed next to the map.
+     |       |        |                                      | OUT    : Function displays the glyph center in (long, lat) and
+     |       |        |                                      |          the name of the district(s) which are represented by the glyph.
+     |       |        |                                      |          The sound of the glyph will be represented as a time/domain signal
+     |       |        |                                      |          in a diagram. In Addition to the glyph representation on the map,
+     |       |        |                                      |          a model glyph with higher resolution and the respective weather-features
+     |       |        |                                      |          informations of the choosen glyph will be visualized.
+-------------------------------------------------------------------------------------------------------------------------------------

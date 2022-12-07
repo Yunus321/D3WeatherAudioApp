@@ -1,7 +1,8 @@
 <!DOCTYPE html>
 <html lang='en'>
     <head>
-        <meta charset='UTF-8'>
+       
+        <meta name="viewport" content="width=device-width , initial-scale=1.0, maximum-scale=1.0, user-scalable=0">
         <title>Germany_Map</title>
         <script src="//d3js.org/d3.v7.min.js" charset="utf-8"></script>
         <link rel="stylesheet" href="index.css">
@@ -10,13 +11,23 @@
     </head>
 
     <body>
-        <div class="div_map">
-            <svg id="data_vis"  ></svg>
+        <div horizontal layout>
+            <div class="split right">
+                <div class="centered">
+                    <h1>TODO -> Data Representation of Glyph</h1>
+                </div>
+            </div>
+            <div class="split left">
+                <div class="centered">
+                    <svg id="data_vis" class="svg-container"></svg>
+                </div>
+            </div>
         </div>
         <script src="main.js"></script>
         <script src="/Glyphs/glyph.js"></script>
         <script src="/Audio/audioContext.js"></script>
         <script src="/Interface/glyphsAndWeatherDataInterface.js"></script>
+        <script src="/Interface/glyphsAndAudioContextInterface.js"></script>
         <script src="/Interface/weatherApi.js"></script>
        
     </body>

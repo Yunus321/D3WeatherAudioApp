@@ -3,7 +3,7 @@ Glyph parameter :
 (1)
     Hourly : temperature - current time
     Extreme Temperatures in Germany ever :
-    Extreme Maximum : 40,3 °C  / Extreme Minimum : -45,9 °C 
+    Extreme Maximum : 40,3 °C  / Extreme Minimum : -45,9 °C
     -> Scaling from -15 to 35 < - > (average annnual temperature (2021) = approx. 9,3 °C)
 (2)
     Daily : (km/h) wind speed - maximum speed 10 meter above ground (can be changed into hourly)
@@ -17,22 +17,23 @@ Glyph parameter :
     -> Scaling from 0 to 20 cm (each data above 20 cm belongs to max. 20 cm)
 (5)
     Relative humidity is choosen hourly - current time
-    -> Scaling from 60 % to 100 %  (each data below 60 % belongs to min) 
+    -> Scaling from 60 % to 100 %  (each data below 60 % belongs to min)
 */
 
-var c =0;
 // The average of each unit should represent the middle of each glypgh-axes / feature
 // Example average of yearly precipitation in Germany from 2012 - 2021 : approx .: 740 mm per year -> average rain per day is 2,03 mm.
 // Thus maxRainFall = 4.1 -> Every rainfall sum above 4.1 mm belongs to max 4.1 mm
 
-const minTemperature = -15; // °C
-const maxTemperature = 35; // °C
-const maxWindSpeed = 30; // km/h
-const maxRainFall = 4.06; //mm
-const maxSnowFall = 5; //cm
-const minRelativeHumidity = 60; //%
+const minTemperature = -20 // °C
+const maxTemperature = 41.2 // °C
+const maxWindSpeed = 30 // km/h
+const maxRainFall = 4.06 //mm
+const maxSnowFall = 5 //cm
+const minRelativeHumidity = 75 //%
+const maxRelativeHumidity = 100
 
 function scaleParameter(minDomain,maxDomain,value) {
+
     run2pixels = d3.scaleLinear()
         .domain([minDomain, maxDomain]) // weather data border values
         .range([0, glyphRadius]) // unit: glyph radius length
@@ -65,7 +66,7 @@ function glyphsWeatherDataInterface(districtWeatherData) {
 
     //5. paramter temperature:
     var relativehumidity = districtWeatherData.hourly.relativehumidity_2m[0]
-    relativehumidity = (relativehumidity < minRelativeHumidity) ? (minRelativeHumidity) : (relativehumidity)
-    glyphData[4] = scaleParameter(minRelativeHumidity,100,relativehumidity)
+    relativehumidity = (relativehumidity > maxRelativeHumidity) ? (maxRelativeHumidity) : ((relativehumidity < minRelativeHumidity) ? (minRelativeHumidity) : (relativehumidity))
+    glyphData[4] = scaleParameter(minRelativeHumidity,maxRelativeHumidity,relativehumidity)
     return glyphData
 }
