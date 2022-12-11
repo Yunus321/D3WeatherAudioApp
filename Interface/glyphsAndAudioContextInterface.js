@@ -3,28 +3,21 @@ var currentGlyphValues
 var currentGlyph
 var soundVolume
 
-function startAudioInterface(glyph) {
+function startAudioInterface(glyph,districtDict) {
 
     if (currentGlyph != glyph.path[0]['__data__']) {
         currentGlyph = glyph.path[0]['__data__']
-        for (var i = 0; i < reducedFeatures.length; i++) {
-            if(currentGlyph == reducedFeatures[i]) {
-                currentGlyphValues = glyphWeatherDataScaleValues[i]
-            }
-        }
+        districtDict.map(elems => (currentGlyph == elems.features) ? (currentGlyphValues = elems.glyphWeatherDataScaleValues) : (elems))
     }
     soundVolume = 0
-    startSound(currentGlyphValues, soundVolume)
+    var summedFrequencies = startSound(currentGlyphValues, soundVolume)
+    return [currentGlyphValues,summedFrequencies]
 }
 
 function calculateNewSoundVolume(cursorPos) {
 
     var disFromCircleCenter = Math.sqrt((Math.abs(cursorPos[0])**2 + (Math.abs(cursorPos[1])**2)))
-    var reduceVolume = 10
+    var reduceVolume = glyphRadius
     soundVolume = (glyphRadius - disFromCircleCenter) / reduceVolume
     changeVolume(soundVolume)
 }
-
-
-
-

@@ -1,8 +1,8 @@
-
-function setCircles(circle, ger) {
+var mapFeatures = []
+function setCircles(circle, districtDict) {
 
     circle
-        .data(ger.features)
+        .data(mapFeatures)
         .enter()
             .append('circle')
             .attr('d', geoGenerator)
@@ -13,7 +13,10 @@ function setCircles(circle, ger) {
             .attr('r', glyphRadius)
             .style("opacity", 0.4)
             .on("mouseenter", function(d) {
-                startAudioInterface(d)
+                var [currentGlyphScaleValues,summedFrequencies] = startAudioInterface(d,districtDict)
+                setTimeDomainDiagram(summedFrequencies)
+                setModelPath(currentGlyphScaleValues,d,districtDict)
+                //startGlyphInformationVisualization(currentGlyphScaleValues,summedFrequencies,d,objectData,weatherData)
             })
             .on("mousemove", function(d) {
                 var cursorPosOnGlyph = d3.pointer( d )
@@ -24,12 +27,15 @@ function setCircles(circle, ger) {
             })
 }
 
-function setAxes(line, ger, numbOfFeatures) {
+function setAxes(line,districtDict,numbOfFeatures) {
+
+    districtDict.map(function(elems) {
+        mapFeatures.push(elems.features)})
 
     for(var i = 0; i < numbOfFeatures; i++) {
-        var angle = (3/2)*Math.PI + (2 * Math.PI * i / numbOfFeatures)
+        var angle = (3/2) * Math.PI + (2 * Math.PI * i / numbOfFeatures)
         line
-            .data(ger.features)
+            .data(mapFeatures)
             .enter().append('line')
                 .attr('d', geoGenerator)
                 .attr('x1', function(d) { return geoGenerator.centroid(d.geometry)[0] })
@@ -41,32 +47,28 @@ function setAxes(line, ger, numbOfFeatures) {
     }
 }
 
-function setPath(path,ger,weatherData, objectData, numbOfFeatures) {
+function setPath(path,districtDict,numbOfFeatures) {
 
     var lineGenerator = d3.line()
-    var objectWeatherData
     var glyphPathScaleValues
-    var counter = 0
     path
-        .data(ger.features)
+        .data(mapFeatures)
         .enter().append('path')
         .attr("d",function(d) {
             var pathData = []
-            for(var i = 0; i < objectData.length; i++) {
-                if(objectData[i] == d) { //check whether the weather data belongs to the current object
-                    objectWeatherData = weatherData[i]
-                    glyphPathScaleValues = glyphsWeatherDataInterface(objectWeatherData)
-                    glyphWeatherDataScaleValues[counter] = glyphPathScaleValues
-                    counter++
+            districtDict.map(function(elems) {
+                if(elems.features == d) {
+                    glyphPathScaleValues = glyphsWeatherDataInterface(elems.weatherData)
+                    elems.glyphWeatherDataScaleValues = glyphPathScaleValues
                 }
-            }
+            })
+            //calculate the scale factor for the glyph path in glyphAndWeatherDataInterface
             for(var i = 0; i < numbOfFeatures; i++) {
                 var angle = (3/2)*Math.PI + (2 * Math.PI * i / numbOfFeatures)
-                //calculate the scale factor for the glyph path in glyphAndWeatherDataInterface
-                pathData.push([glyphPathScaleValues[i] * Math.cos(angle) + geoGenerator.centroid(d.geometry)[0],
-                            glyphPathScaleValues[i] * Math.sin(angle) + geoGenerator.centroid(d.geometry)[1]])
+                pathData.push([glyphPathScaleValues[i] * Math.cos(angle) + geoGenerator.centroid(d.geometry)[0],glyphPathScaleValues[i] * Math.sin(angle) 
+                            + geoGenerator.centroid(d.geometry)[1]])
             }
-            pathData.push(pathData[0]) //connect the paths by adding the first element to the last
+            pathData.push(pathData[0]) //connect the path stroke by adding the first element to the last
             return lineGenerator(pathData)
         })
         .attr("stroke-width", 0.2)
@@ -75,5 +77,3 @@ function setPath(path,ger,weatherData, objectData, numbOfFeatures) {
         .attr("stroke-opacity", 1)
         .attr("opacity", 0.9)
 }
-
-

@@ -26,8 +26,11 @@ Glyph parameter :
 
 const minTemperature = -20 // °C
 const maxTemperature = 41.2 // °C
+const minWindSpeed = 0 // km/h
 const maxWindSpeed = 30 // km/h
-const maxRainFall = 4.06 //mm
+const minRainFall = 0 // mm
+const maxRainFall = 5 //mm (4.06)
+const minSnowFall = 0 //cm
 const maxSnowFall = 5 //cm
 const minRelativeHumidity = 75 //%
 const maxRelativeHumidity = 100
@@ -62,7 +65,7 @@ function glyphsWeatherDataInterface(districtWeatherData) {
     //4. parameter snowfall:
     var snowfall = districtWeatherData.daily.snowfall_sum[0]
     snowfall = (snowfall > maxSnowFall) ? (maxSnowFall) : (snowfall)
-    glyphData[3] = scaleParameter(0,maxSnowFall,snowfall)
+    glyphData[3] = scaleParameter(minSnowFall,maxSnowFall,snowfall)
 
     //5. paramter temperature:
     var relativehumidity = districtWeatherData.hourly.relativehumidity_2m[0]

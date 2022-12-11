@@ -17,9 +17,9 @@ WPID | TYPE  | STATUS |   TITLE                              | DESCRIPTION
      |       |        |                                      |          and the parameter value determines the contribution of that
      |       |        |                                      |          frequency within the final audio signal
      |       |        |                                      | OUT    : Function taking weather parameters as input, producing
-     |       |        |                                      |          an array representing the samples for one second of audio
+     |       |        |                                      |          an array representing the samples for one second of audio -> (loop)
 --------------------------------------------------------------------------------------------------------------------------------------
-004  | code  |        |   Implement glyph data visualization | IN     : Weather + district informations of current glyph
+004  | code  |  80%   |   Implement glyph data visualization | IN     : Weather + district informations of current glyph
      |       |        |                                      | PROCESS: Implement a function for visualizing the current glyph.
      |       |        |                                      |          To displaying the glyph informations, the cursor has to be
      |       |        |                                      |          on the glyph. The glyph data will be displayed next to the map.

@@ -1,9 +1,8 @@
 <!DOCTYPE html>
 <html lang='en'>
     <head>
-       
         <meta name="viewport" content="width=device-width , initial-scale=1.0, maximum-scale=1.0, user-scalable=0">
-        <title>Germany_Map</title>
+        <title>Germany_Weather_Glyph_Frequency</title>
         <script src="//d3js.org/d3.v7.min.js" charset="utf-8"></script>
         <link rel="stylesheet" href="index.css">
         <script src="https://cdn.jsdelivr.net/npm/d3-array@3"></script>
@@ -13,22 +12,27 @@
     <body>
         <div horizontal layout>
             <div class="split right">
-                <div class="centered">
-                    <h1>TODO -> Data Representation of Glyph</h1>
-                </div>
-            </div>
-            <div class="split left">
-                <div class="centered">
+                <div class="map">
                     <svg id="data_vis" class="svg-container"></svg>
                 </div>
             </div>
-        </div>
+            <div id="rightSplit" class="split left">
+                <div class="row row1" style="background-color:whitesmoke">
+                    <svg id="data_vis1" class="svg-container2"></svg>
+                </div>
+                <div class="row row2" style="background-color: whitesmoke">
+                    <svg id="data_vis2" class="svg-container3"></svg>
+                </div>
+            </div>
+
         <script src="main.js"></script>
         <script src="/Glyphs/glyph.js"></script>
         <script src="/Audio/audioContext.js"></script>
         <script src="/Interface/glyphsAndWeatherDataInterface.js"></script>
         <script src="/Interface/glyphsAndAudioContextInterface.js"></script>
         <script src="/Interface/weatherApi.js"></script>
+        <script src="/Display/glyphModelVisualization.js"></script>
+        <script src="/Display/timeDomainDiagram.js"></script>
        
     </body>
 </html>
