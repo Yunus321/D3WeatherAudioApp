@@ -1,10 +1,7 @@
 
 //Define frequencies of each weather parameter
 //conversion -> [temperature = 440 Hz (Kammerton), wind_speed = 330 Hz, rain_sum = 297 Hz, snowfall_sum = 264 Hz, humidity = 396 Hz]
-//TODO! improve the sound -> user can change the frequency of each feature !!!!!
-///const frequencies = [440,330,297,264,396] / [440,330,297,396,264] / 297,330,440,396,264]
-
-const frequencies = [297,330,440,396,264] //humidity should get a lower frequency !
+const frequencies = [297,330,440,396,264]
 
 function startSound(_currentGlyphValues, _soundVolume) {
 

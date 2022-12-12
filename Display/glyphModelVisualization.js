@@ -6,8 +6,8 @@ var center_y = height/4
 var svg1
 var ft_name = ["Temperature (C°)", "Wind Speed (km/h)", "Rainfall Sum (mm)", "Snowfall Sum (cm)", "Rel. Humidity (%)"]
 var adjustTextForFeatureNames = [[-width/20,-height/90],[0,0],[0,height/50],[-width/7,height/50],[-width/7.5,0]]
-var adjustTextForFeatureValues = [[[width/350,-height/80],[width/320,height/60]],[[width/50,height/90],[-width/60,height/50]],[[width/350,height/30],[-width/50,height/200]],
-                                [[-width/40,height/40],[-width/150,-height/100]],[[-width/40,-height/80],[width/150,0]]]
+var adjustTextForFeatureValues = [[[width/350,-height/80],[width/320,height/60]],[[width/50,height/90],[-width/60,height/50]],
+                                [[width/350,height/35],[-width/50,height/200]],[[-width/40,height/50],[-width/150,-height/100]],[[-width/40,-height/80],[width/150,0]]]
 var featuresTextColors = ["#FF0000", "#27AE60", "#2980B9", "#7D3C98", "#A52A2A"]
 var min_max_values = [[minTemperature,maxTemperature],[minWindSpeed,maxWindSpeed],[minRainFall,maxRainFall],
                      [minSnowFall,maxSnowFall],[minRelativeHumidity,maxRelativeHumidity]]
@@ -45,18 +45,18 @@ function startGlyphModelVisualization() {
                 .attr("r", radialScale(t)))
 
     // set text depending on the screen size !
-    var h1 = height/35
+    var h1 = height/33
     var h2 = height/42
     var textSize = height/60
 
-    setText(svg1, width/4.7,height/24,h1+"px","Glyph Representation","#000000","_text")
+    setText(svg1, width/5,height/24,h1+"px","Glyph Representation","#000000","_text")
     setText(svg1, width/(3/2) + (width/20),height/24,h1+"px","Weather Data","#000000","_text")
-    setText(svg1, width/(3/2) + (width/20),height/13,h2+"px","District.:","#FF0000","_text")
-    setText(svg1, width/(3/2) + (width/20),height/6,h2+"px","Daily.:","#FF0000","_text")
+    setText(svg1, width/(3/2) + (width/20),height/13,h2+"px","District.:","#000000","_text")
+    setText(svg1, width/(3/2) + (width/20),height/6,h2+"px","Daily.:","#000000","_text")
     setText(svg1, width/(3/2) + (width/20),height/6+(height/25),textSize +"px","Rainfall Sum :","#000000","_text")
     setText(svg1, width/(3/2) + (width/20),height/6+2*(height/25),textSize +"px","Snowfall Sum :","#000000","_text")
     setText(svg1, width/(3/2) + (width/20),height/6+3*(height/25),textSize +"px","Wind Speed max. :","#000000","_text")
-    setText(svg1, width/(3/2) + (width/20),height/6+4*(height/25),h2+"px","Hourly.:","#FF0000","_text")
+    setText(svg1, width/(3/2) + (width/20),height/6+4*(height/25),h2+"px","Hourly.:","#000000","_text")
     setText(svg1, width/(3/2) + (width/20),height/6+5*(height/25),textSize +"px","Temperature :","#000000","_text")
     setText(svg1, width/(3/2) + (width/20),height/6+6*(height/25),textSize +"px","Rel. Humidity :","#000000","_text")
 
@@ -83,7 +83,6 @@ function startGlyphModelVisualization() {
     }
 }
 
-
 function setModelPath(scaleValues,d,districtDict) { //showGlyphPathAndData
     svg1.selectAll("path").remove()
     svg1.selectAll("#replacetext").remove()
@@ -106,19 +105,19 @@ function setModelPath(scaleValues,d,districtDict) { //showGlyphPathAndData
         .attr("stroke-width", 1)
         .attr("stroke", "red")
         .attr("fill",  "yellow")
-        .attr("opacity", 0.6)
+        .attr("opacity", 0.85)
     
     districtDict.map(function(elems) {
         
         if (elems.features == d.path[0]['__data__']) {
             var textSize = height/60
             var h3 = height/50
-            setText(svg1, width/(3/2) + (width/20),height/13 +0.8*(height/20),h3+"px",elems.features.properties.GEN +"","#000000","replacetext")
-            setText(svg1, width/(3/2) + (width/4.5) ,height/6+(height/25),textSize +"px",elems.weatherData.daily.rain_sum[0].toFixed(3) + " mm","#000000","replacetext")
-            setText(svg1, width/(3/2) + (width/4.5),height/6+2*(height/25),textSize +"px",elems.weatherData.daily.snowfall_sum[0].toFixed(3) + " cm","#000000","replacetext")
-            setText(svg1, width/(3/2) + (width/4.5),height/6+5*(height/25),textSize +"px",elems.weatherData.hourly.temperature_2m[0].toFixed(3) + " C°","#000000","replacetext")
-            setText(svg1, width/(3/2) + (width/4.5),height/6+3*(height/25),textSize +"px",elems.weatherData.daily.windspeed_10m_max[0].toFixed(3) + " km/h","#000000","replacetext") //muss zu daily !
-            setText(svg1, width/(3/2) + (width/4.5),height/6+6*(height/25),textSize +"px",elems.weatherData.hourly.relativehumidity_2m[0].toFixed(3) + " %","#000000","replacetext")
+            setText(svg1, width/(3/2) + (width/20),height/13 +0.8*(height/20),h3+"px",elems.features.properties.GEN +"","#FF0000","replacetext")
+            setText(svg1, width/(3/2) + (width/4.5) ,height/6+(height/25),textSize +"px",elems.weatherData.daily.rain_sum[0].toFixed(3) + " mm","#FF0000","replacetext")
+            setText(svg1, width/(3/2) + (width/4.5),height/6+2*(height/25),textSize +"px",elems.weatherData.daily.snowfall_sum[0].toFixed(3) + " cm","#FF0000","replacetext")
+            setText(svg1, width/(3/2) + (width/4.5),height/6+5*(height/25),textSize +"px",elems.weatherData.hourly.temperature_2m[0].toFixed(3) + " C°","#FF0000","replacetext")
+            setText(svg1, width/(3/2) + (width/4.5),height/6+3*(height/25),textSize +"px",elems.weatherData.daily.windspeed_10m_max[0].toFixed(3) + " km/h","#FF0000","replacetext")
+            setText(svg1, width/(3/2) + (width/4.5),height/6+6*(height/25),textSize +"px",elems.weatherData.hourly.relativehumidity_2m[0].toFixed(3) + " %","#FF0000","replacetext")
         }
     })
 }

@@ -14,6 +14,7 @@ var source = 0
 d3.json('/Json_data/landkreise_simplify200.geojson').then(function(ger) {
     // create instance of Audiocontext -> use in class audiocontext
     ctx = new AudioContext
+    console.log(ctx.sampleRate)
     startTimeDomainDiagram()
     startGlyphModelVisualization()
 
@@ -63,17 +64,16 @@ d3.json('/Json_data/landkreise_simplify200.geojson').then(function(ger) {
     var requests = [];
     async function getapi(url) {   
         // String response
-        const response = await fetch(url);        
+        const response = await fetch(url)
         return response
     }
     
     // Calling that async function
     for(var i = 0; i < urls.length;i++) {
-        requests[i] = getapi(urls[i]);
+        requests[i] = getapi(urls[i])
     }
-    
 
-    //Asynchron fetching of data. In case of success the weather data takes around 3 seconds to display the data
+    //Asynchron fetching of data. In case of success the App takes around 3 seconds to display the data
     Promise.all(requests).then(responses => Promise.all(responses.map(r => r.json())))
         .then(function(weatherData) {
             var districtDict = reduceGlyphs(ger,weatherData) // reduce glyph overlapping
@@ -81,7 +81,7 @@ d3.json('/Json_data/landkreise_simplify200.geojson').then(function(ger) {
             setPath(path,districtDict,numberOfFeatures)
             setCircles(circle, districtDict)
         })
-    
+
     function reduceGlyphs(ger,weatherData) {
 
         function calcMedian(arr1, arr2) {
