@@ -1,4 +1,5 @@
 var mapFeatures = []
+
 function setCircles(circle, districtDict) {
 
     circle
