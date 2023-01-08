@@ -4,7 +4,7 @@ Glyph parameter :
     Hourly : temperature - current time
     Extreme Temperatures in Germany ever :
     Extreme Maximum : 41,2 °C  / Extreme Minimum : -37,8 °C between 1930 and 2022
-    -> Scaling from -20 to 
+    -> Scaling from -20 to 41.2
 (2)
     Daily : (km/h) wind speed - maximum speed 10 meter above ground
     Average max. 22,3 km/h between 1981 and 2000.

@@ -2,6 +2,7 @@
 //define frequencies of each weather parameter
 
 const frequencies = [264,330,352,396,528]
+
 // [264,330,352,396,528] <-> [c',e',f',g',c''] <-> [temperature,windspeed,rainfallsum,snowfallsum,rel. humidity]
 
 function startSound(_currentGlyphValues, _soundVolume) {
@@ -43,7 +44,7 @@ function conversionAndSumOfFrequencies(_currentGlyphValues) {
 
     for (var i = 0; i < _currentGlyphValues.length; i++) {
         var arr = []
-        for (var j = 0; j < ctx.sampleRate; j++) { //_currentGlyphValues[j] returns the amplitude of each weather feature
+        for (var j = 0; j < ctx.sampleRate; j++) { //_currentGlyphValues[i] returns the amplitude of each weather feature
             arr[j] = calculateSineWave(j,frequencies[i],ctx) *  calcAmplitude(_currentGlyphValues[i]) 
         }
         for(var m = 0; m < ctx.sampleRate; m++) {

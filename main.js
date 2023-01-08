@@ -2,13 +2,14 @@
 var width = window.innerWidth /2;
 var height = window.innerHeight;
 const numberOfFeatures = 5
+const glyphRadius = 10
 var projection
 var urls = []
-const glyphRadius = 10
 var ctx
 var gainNode
 var source
 var date
+
 //source : © GeoBasis-DE / BKG 2013 (Data changed) - visualize the map by a geojson file - http://opendatalab.de/projects/geojson-utilities/
 
 d3.json('/Json_data/landkreise_simplify200.geojson').then(function(ger) {
@@ -107,10 +108,14 @@ d3.json('/Json_data/landkreise_simplify200.geojson').then(function(ger) {
                     if ((Math.abs(center[0] - centerArr[j][0])**2 +(Math.abs(center[1] - centerArr[j][1])**2) < ((1.8*glyphRadius)**2))) {
                         posFree = false
                         districtDict[j].weatherData.daily.rain_sum = calcMedian(weatherData[i].daily.rain_sum, districtDict[j].weatherData.daily.rain_sum)
-                        districtDict[j].weatherData.daily.snowfall_sum = calcMedian(weatherData[i].daily.snowfall_sum, districtDict[j].weatherData.daily.snowfall_sum)
-                        districtDict[j].weatherData.daily.windspeed_10m_max = calcMedian(weatherData[i].daily.windspeed_10m_max, districtDict[j].weatherData.daily.windspeed_10m_max)
-                        districtDict[j].weatherData.hourly.relativehumidity_2m = calcMedian(weatherData[i].hourly.relativehumidity_2m, districtDict[j].weatherData.hourly.relativehumidity_2m)
-                        districtDict[j].weatherData.hourly.temperature_2m = calcMedian(weatherData[i].hourly.temperature_2m, districtDict[j].weatherData.hourly.temperature_2m)
+                        districtDict[j].weatherData.daily.snowfall_sum = calcMedian(weatherData[i].daily.snowfall_sum, 
+                                                                        districtDict[j].weatherData.daily.snowfall_sum)
+                        districtDict[j].weatherData.daily.windspeed_10m_max = calcMedian(weatherData[i].daily.windspeed_10m_max, 
+                                                                        districtDict[j].weatherData.daily.windspeed_10m_max)
+                        districtDict[j].weatherData.hourly.relativehumidity_2m = calcMedian(weatherData[i].hourly.relativehumidity_2m, 
+                                                                        districtDict[j].weatherData.hourly.relativehumidity_2m)
+                        districtDict[j].weatherData.hourly.temperature_2m = calcMedian(weatherData[i].hourly.temperature_2m, 
+                                                                        districtDict[j].weatherData.hourly.temperature_2m)
                         districtDict[j].overlappingDistricts.push(ger.features[i])
                         break
                     }
@@ -124,5 +129,3 @@ d3.json('/Json_data/landkreise_simplify200.geojson').then(function(ger) {
         return districtDict
     }
 })
-
-// TODO hourly arrays richtig indexieren -> nach currentTime und nicht einfach den ersten Index übernehmen !!!

@@ -12,14 +12,14 @@ body {
   overflow-x: hidden;
 }
 
-.left {
-  left: 0;
-  background-color: #d7d7d7;
-}
-
 .right {
   right: 0;
   background-color: whitesmoke;
+}
+
+.left {
+  left: 0;
+  background-color: #d7d7d7;
 }
 
 .row {

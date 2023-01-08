@@ -108,7 +108,7 @@ function setModelPath(scaleValues,d,districtDict) { //showGlyphPathAndData
         .attr("opacity", 0.85)
     
     districtDict.map(function(elems) {
-        
+
         if (elems.features == d.path[0]['__data__']) {
             var textSize = height/60
             var h3 = height/50

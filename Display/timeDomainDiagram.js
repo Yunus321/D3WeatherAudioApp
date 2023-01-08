@@ -2,7 +2,9 @@
 var margin = {top: height/8, right: width/8, bottom: height/15, left: width/10},
 _width = width - margin.left - margin.right,
 _height = (height/2) - margin.top - margin.bottom;
+
 var svg2
+
 var x = d3.scaleLinear()
     .domain([0, 2200])
     .range([0, _width])

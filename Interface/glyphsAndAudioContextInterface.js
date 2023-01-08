@@ -1,4 +1,3 @@
-
 var currentGlyphValues
 var currentGlyph
 var soundVolume
