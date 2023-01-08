@@ -4,22 +4,23 @@ var height = window.innerHeight;
 const numberOfFeatures = 5
 var projection
 var urls = []
-var glyphRadius = 10
+const glyphRadius = 10
 var ctx
 var gainNode
-var source = 0
-
-//source : © GeoBasis-DE / BKG 2013 (Data changed) - visualize the map by a geojson file
+var source
+var date
+//source : © GeoBasis-DE / BKG 2013 (Data changed) - visualize the map by a geojson file - http://opendatalab.de/projects/geojson-utilities/
 
 d3.json('/Json_data/landkreise_simplify200.geojson').then(function(ger) {
     // create instance of Audiocontext -> use in class audiocontext
     ctx = new AudioContext
-    console.log(ctx.sampleRate)
-    startTimeDomainDiagram()
     startGlyphModelVisualization()
+    startTimeDomainDiagram()
+
+    date = new Date()
 
     projection = d3.geoMercator()
-         .center([10.27055,53.3])
+        .center([10.27055,53.3])
         .scale([height*4.5]) 
         .rotate([0,0,0])
     geoGenerator = d3.geoPath().projection(projection)
@@ -62,7 +63,7 @@ d3.json('/Json_data/landkreise_simplify200.geojson').then(function(ger) {
     var path = d3.select("g").selectAll('paths')
 
     var requests = [];
-    async function getapi(url) {   
+    async function fetchData(url) {
         // String response
         const response = await fetch(url)
         return response
@@ -70,12 +71,13 @@ d3.json('/Json_data/landkreise_simplify200.geojson').then(function(ger) {
     
     // Calling that async function
     for(var i = 0; i < urls.length;i++) {
-        requests[i] = getapi(urls[i])
+        requests[i] = fetchData(urls[i])
     }
 
     //Asynchron fetching of data. In case of success the App takes around 3 seconds to display the data
     Promise.all(requests).then(responses => Promise.all(responses.map(r => r.json())))
         .then(function(weatherData) {
+            console.log(ger)
             var districtDict = reduceGlyphs(ger,weatherData) // reduce glyph overlapping
             setAxes(line,districtDict,numberOfFeatures) 
             setPath(path,districtDict,numberOfFeatures)
@@ -83,7 +85,7 @@ d3.json('/Json_data/landkreise_simplify200.geojson').then(function(ger) {
         })
 
     function reduceGlyphs(ger,weatherData) {
-
+        
         function calcMedian(arr1, arr2) {
             var median = []
             for(var i = 0; i < arr1.length;i++) {
@@ -123,3 +125,4 @@ d3.json('/Json_data/landkreise_simplify200.geojson').then(function(ger) {
     }
 })
 
+// TODO hourly arrays richtig indexieren -> nach currentTime und nicht einfach den ersten Index übernehmen !!!

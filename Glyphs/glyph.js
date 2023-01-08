@@ -14,8 +14,8 @@ function setCircles(circle, districtDict) {
             .style("opacity", 0.4)
             .on("mouseenter", function(d) {
                 var [currentGlyphScaleValues,summedFrequencies] = startAudioInterface(d,districtDict)
-                setTimeDomainDiagram(currentGlyphScaleValues,summedFrequencies)
                 setModelPath(currentGlyphScaleValues,d,districtDict)
+                setTimeDomainDiagram(currentGlyphScaleValues,summedFrequencies)
             })
             .on("mousemove", function(d) {
                 var cursorPosOnGlyph = d3.pointer( d )

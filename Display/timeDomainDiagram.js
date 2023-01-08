@@ -65,7 +65,7 @@ function setTimeDomainDiagram(currentGlyphScaleValues,summedFrequencies) {
     .range([0, 1])
     var data = []
     svg2.selectAll("#replace").remove()
-    for (var i = 0; i < 2200; i++) {  // 44100 samples represents 1 second. 44100 / 2205 = 50 -> thus time frame is 50 ms
+    for (var i = 0; i < 2200; i++) {  // 44100 samples represents 1 second. 44100 / 2205 = 20 -> thus time frame is 50 ms
         data.push({x:i, y:summedFrequencies[i]})
     }
     var textSize = height/61

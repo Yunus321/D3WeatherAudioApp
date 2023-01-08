@@ -64,7 +64,7 @@ function startGlyphModelVisualization() {
     for(var i = 0; i < numberOfFeatures; i++) {
         var angle = (3/2) * Math.PI + (2 * Math.PI * i / numberOfFeatures)
         svg1.append('line')
-                .attr("id", "-replacetext")
+                .attr("id", "_text")
                 .attr('x1', center_x )
                 .attr('y1', center_y )
                 .attr('x2', axesLength * Math.cos(angle) + center_x )

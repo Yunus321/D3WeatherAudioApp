@@ -1,13 +1,13 @@
 
-//Define frequencies of each weather parameter
-//conversion -> [temperature = 440 Hz (Kammerton), wind_speed = 330 Hz, rain_sum = 297 Hz, snowfall_sum = 264 Hz, humidity = 396 Hz]
-const frequencies = [297,330,440,396,264]
+//define frequencies of each weather parameter
+
+const frequencies = [264,330,352,396,528]
+// [264,330,352,396,528] <-> [c',e',f',g',c''] <-> [temperature,windspeed,rainfallsum,snowfallsum,rel. humidity]
 
 function startSound(_currentGlyphValues, _soundVolume) {
 
     gainNode = ctx.createGain()
     gainNode.gain.value = _soundVolume
-    gainNode.connect(ctx.destination)
     var summedFrequencies = conversionAndSumOfFrequencies(_currentGlyphValues)
     var buf = new Float32Array(summedFrequencies.length)
     for (var i = 0; i < summedFrequencies.length; i++) buf[i] = summedFrequencies[i]
@@ -16,7 +16,8 @@ function startSound(_currentGlyphValues, _soundVolume) {
     source = ctx.createBufferSource()
     source.buffer = buffer
     source.connect(gainNode)
-    source.start()
+    gainNode.connect(ctx.destination)
+    source.start(0)
     source.loop = true
     return summedFrequencies
 }
@@ -25,8 +26,8 @@ function stopSound() {
     source.stop(0)
 }
 
-function changeVolume(setNewVolume) {
-    gainNode.gain.value = setNewVolume
+function changeVolume(newVolume) {
+    gainNode.gain.value = newVolume
     source.connect(ctx.destination)
 }
 
@@ -42,8 +43,8 @@ function conversionAndSumOfFrequencies(_currentGlyphValues) {
 
     for (var i = 0; i < _currentGlyphValues.length; i++) {
         var arr = []
-        for (var j = 0; j < ctx.sampleRate; j++) {
-            arr[j] = calculateSineWave(j,frequencies[i],ctx) *  calcAmplitude(_currentGlyphValues[i]) //_currentGlyphValues[j] gives the amplitude of each weather feature 
+        for (var j = 0; j < ctx.sampleRate; j++) { //_currentGlyphValues[j] returns the amplitude of each weather feature
+            arr[j] = calculateSineWave(j,frequencies[i],ctx) *  calcAmplitude(_currentGlyphValues[i]) 
         }
         for(var m = 0; m < ctx.sampleRate; m++) {
             sumOfFrequencies[m] += arr[m]
