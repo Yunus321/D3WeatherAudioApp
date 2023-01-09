@@ -62,27 +62,29 @@ d3.json('/Json_data/landkreise_simplify200.geojson').then(function(ger) {
     var circle = d3.select("g").selectAll('circle')
     var line = d3.select("g").selectAll('line')
     var path = d3.select("g").selectAll('paths')
-
+    
+  
     var requests = [];
     async function fetchData(url) {
-        // String response
         const response = await fetch(url)
         return response
     }
-    
+
     // Calling that async function
     for(var i = 0; i < urls.length;i++) {
         requests[i] = fetchData(urls[i])
     }
-
+    
     //Asynchron fetching of data. In case of success the App takes around 3 seconds to display the data
     Promise.all(requests).then(responses => Promise.all(responses.map(r => r.json())))
         .then(function(weatherData) {
-            console.log(ger)
             var districtDict = reduceGlyphs(ger,weatherData) // reduce glyph overlapping
             setAxes(line,districtDict,numberOfFeatures) 
             setPath(path,districtDict,numberOfFeatures)
             setCircles(circle, districtDict)
+        })
+        .catch(error => {
+            location.reload() // catch API requests error by reloading page !
         })
 
     function reduceGlyphs(ger,weatherData) {

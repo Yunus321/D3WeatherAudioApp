@@ -53,12 +53,12 @@ function glyphsWeatherDataInterface(districtWeatherData) {
     //2. parameter wind speed:
     var windSpeed = districtWeatherData.daily.windspeed_10m_max[0] // use index 0 for the current day !
     windSpeed = (windSpeed > maxWindSpeed) ? (maxWindSpeed) : (windSpeed)
-    glyphData[1] = scaleParameter(0,maxWindSpeed,windSpeed)
+    glyphData[1] = scaleParameter(minWindSpeed,maxWindSpeed,windSpeed)
 
     //3. parameter rainfall:
     var rainfall = districtWeatherData.daily.rain_sum[0]
     rainfall = (rainfall > maxRainFall) ? (maxRainFall) : (rainfall)
-    glyphData[2] = scaleParameter(0,maxRainFall,rainfall)
+    glyphData[2] = scaleParameter(minRainFall,maxRainFall,rainfall)
 
     //4. parameter snowfall:
     var snowfall = districtWeatherData.daily.snowfall_sum[0]
