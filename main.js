@@ -1,6 +1,8 @@
 // variables
-var width = window.innerWidth /2;
-var height = window.innerHeight;
+//var width = screen.width/2 - (screen.width/80)
+//var height = screen.height - (screen.height/9)
+//var width = document.body.clientWidth/2
+//var height = document.body.clientHeight
 const numberOfFeatures = 5
 const glyphRadius = 10
 var projection
@@ -10,6 +12,13 @@ var gainNode
 var source
 var date
 
+var width = window.screen.width/2;
+var height = window.screen.height;
+
+// Get the size of the window or viewport and use it as the size of the SVG element
+window.onresize = function() {
+    location.reload()
+};
 //source : © GeoBasis-DE / BKG 2013 (Data changed) - visualize the map by a geojson file - http://opendatalab.de/projects/geojson-utilities/
 
 d3.json('/Json_data/landkreise_simplify200.geojson').then(function(ger) {
@@ -21,8 +30,10 @@ d3.json('/Json_data/landkreise_simplify200.geojson').then(function(ger) {
     date = new Date()
 
     projection = d3.geoMercator()
-        .center([10.27055,53.3])
-        .scale([height*4.5]) 
+        //.center([10.27055,53.3])
+        .center([10.18,51.3])
+        .scale([height*4.5])
+        .translate([width/2, height/2])
         .rotate([0,0,0])
     geoGenerator = d3.geoPath().projection(projection)
 

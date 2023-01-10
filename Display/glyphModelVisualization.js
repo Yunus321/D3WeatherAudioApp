@@ -5,7 +5,7 @@ var center_x = width/3
 var center_y = height/4
 var svg1
 var ft_name = ["Temperature (C°)", "Wind Speed (km/h)", "Rainfall Sum (mm)", "Snowfall Sum (cm)", "Rel. Humidity (%)"]
-var adjustTextForFeatureNames = [[-width/20,-height/90],[0,0],[0,height/50],[-width/7,height/50],[-width/7.5,0]]
+var adjustTextForFeatureNames = [[-width/18,-height/100],[0,0],[0,height/50],[-width/6.5,height/50],[-width/6.5,0]]
 var adjustTextForFeatureValues = [[[width/350,-height/80],[width/320,height/60]],[[width/50,height/90],[-width/60,height/50]],
                                 [[width/350,height/35],[-width/50,height/200]],[[-width/40,height/50],[-width/150,-height/100]],[[-width/40,-height/80],[width/150,0]]]
 var featuresTextColors = ["#FF0000", "#27AE60", "#2980B9", "#7D3C98", "#A52A2A"]
@@ -24,7 +24,7 @@ function setText(_svg1, pos_x, pos_y, font_size, ft_name,color,id) {
 }
 
 function startGlyphModelVisualization() {
-
+    
     svg1 = d3.select(document.getElementById("data_vis1"))
     .attr('width',(width))
     .attr('height',((height)/2))
@@ -32,7 +32,7 @@ function startGlyphModelVisualization() {
     let radialScale = d3.scaleLinear()
                 .domain([0,10])
                 .range([0,axesLength])
-
+   
     let glyphCircleRadius = [2,4,6,8,10]
 
     glyphCircleRadius.forEach(t =>
